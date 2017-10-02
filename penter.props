@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<!--
+
+  penter.props
+
+  Properties file to set PENTER specific build options. Include this props in your project
+
+-->
+
+<!--
+  ** BEGIN PENTER SPECIFIC DEFINITIONS ===>
+-->
+
+<!--
+  Force the penter library as a dependency. 
+-->
+
+  <ItemGroup>
+    <ProjectReference Include="$(SolutionDir)\penterlib\penterlib.vcxproj"/> 
+  </ItemGroup>
+
+<!--
+  If the USE_PENTER environment variable is set, specify the appropriate
+  C and Link flags
+-->
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalOptions>/D "USE_PENTER" /Gh /GH %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>$(SolutionDir)$(OutDir)penterlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+<!--
+  <=== END PENTER SPECIFIC DEFINITIONS **
+-->
+
+</Project>
